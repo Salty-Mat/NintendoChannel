@@ -9,12 +9,13 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
-	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/wii-tools/lzx/lz10"
 	"hash/crc32"
 	"io"
 	"os"
 	"sync"
+
+	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/wii-tools/lzx/lz10"
 )
 
 type List struct {

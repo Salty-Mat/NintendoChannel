@@ -7,15 +7,16 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
-	"github.com/SketchMaster2001/libwc24crypt"
-	"github.com/jackc/pgx/v4/pgxpool"
-	tpl "github.com/wii-tools/libtpl"
-	"github.com/wii-tools/lzx/lz10"
 	"hash/crc32"
 	"image/jpeg"
 	"log"
 	"os"
 	"unicode/utf16"
+
+	"github.com/SketchMaster2001/libwc24crypt"
+	"github.com/jackc/pgx/v4/pgxpool"
+	tpl "github.com/wii-tools/libtpl"
+	"github.com/wii-tools/lzx/lz10"
 )
 
 type DBBanner struct {
@@ -120,6 +121,8 @@ func CreateCSData() {
 		// Saved as a JPEG image. Convert to TPL for the Wii to read.
 		enc, err := tpl.ToRGB565(pic)
 		common.CheckError(err)
+
+		os.WriteFile(fmt.Sprintf("./%d.tpl", banner.ID), enc, 0777)
 
 		// Append to slice while stripping the TPL header.
 		pics = append(pics, enc[64:])
